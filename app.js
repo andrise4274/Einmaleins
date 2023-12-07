@@ -299,9 +299,9 @@ window.addEventListener('load', function(){
             this.image = img;
             this.speedModifier = speedMod;
             this.width = canvas.width;
-            this.height = 4056;
+            this.height = canvas.height*5;
             this.x = 0;
-            this.y = 0;
+            this.y = -this.height;
         }
 
         update() {
@@ -310,7 +310,7 @@ window.addEventListener('load', function(){
         }
 
         draw(context) {
-            context.drawImage(this.image, this.x, this.y - this.height);
+            context.drawImage(this.image, this.x, this.y/2, this.width, this.height);
         }
         
     }
@@ -318,14 +318,35 @@ window.addEventListener('load', function(){
     class Background {
         constructor(game) {
             this.game = game;
-            this.image1 = document.getElementById('layer2');
+            //sky
+            this.image1 = document.getElementById('layer1');
             this.image2 = document.getElementById('layer2');
-            this.layer1 = new Layer(this.game, this.image1, 1);
-            this.layer2 = new Layer(this.game, this.image2, 1);
-            this.layers = [this.layer1];
+            // stratosphere
+            this.image3 = document.getElementById('layer3');
+            this.image4 = document.getElementById('layer4');
+            // space
+            this.image5 = document.getElementById('layer5');
+            this.image6 = document.getElementById('layer6');
+
+            this.sky1 = new Layer(this.game, this.image1, 1.5);
+            this.sky2 = new Layer(this.game, this.image2, 1.1);
+            this.strat1 = new Layer(this.game, this.image3, 1.5);
+            this.strat2 = new Layer(this.game, this.image4, 1.1);
+            this.space1 = new Layer(this.game, this.image5, 1.5);
+            this.space2 = new Layer(this.game, this.image5, 1.1);
+
+            this.layers = [this.sky1, this.sky2];
         }
 
         update(){
+            // dependant on current points, different background
+            
+            if (Game.points >= this.game.first_change && Game.points <= this.game.second_change) {
+                this.layers = [this.strat1, this.strat2];
+            } else if (Game.points > this.game.second_change){
+                this.layers = [this.space1];
+            }
+            
             this.layers.forEach(layer => layer.update());
         }
 
@@ -341,11 +362,13 @@ window.addEventListener('load', function(){
             this.x = 0;
             this.y = y;
             this.width = canvas.width;
-            this.height = 0.01 * window.innerHeight;
+            this.height = 0.05 * window.innerHeight;
+            this.cloud_width = canvas.width/5;
+            this.text_offset = this.cloud_width/3.5;
             this.correctindex = correctindex;
             this.answers = answers;
             this.mul = mul;
-            this.image = document.getElementById('prov_platform');
+            this.image = document.getElementById('wolke');
         }
 
         update(){
@@ -354,16 +377,16 @@ window.addEventListener('load', function(){
 
         }
         draw(context){
-            //draw a platfo
+            //draw a platform
             for (let i=0; i<3; i++) {
                 context.fillStyle = 'blue';
-                context.drawImage(this.image, (this.width/3 * i), this.y, this.width/3, this.height*5);
+                context.drawImage(this.image, (this.width *(((i+1)*1/10) + i*1/5)), this.y - (canvas.height/6), this.cloud_width, this.height*5);
                 //context.fillRect((this.width/3 * i), this.y, this.width/3, this.height); 
 
                 //draw the number above platforms
                 context.fillStyle = 'black';
                 context.font = Math.floor(0.07 * window.innerHeight) + "px Georgia";
-                context.fillText(this.answers[i], (this.width/3 * i) + deltaButton/2 , this.y - 2);
+                context.fillText(this.answers[i], (this.width *(((i+1)*1/10) + i*1/5)) + this.text_offset, this.y - 2);
             }
         }
     }
@@ -373,16 +396,17 @@ window.addEventListener('load', function(){
             this.game = game;
             this.x = 0;
             this.y = y;
+            this.cloud_width = canvas.width/5;
 
-            this.imgnet = document.getElementById('net');
+            this.imgnet = document.getElementById('wolke');
         }
         update() {
             this.y += Game.speedY;
         }
         draw(context) {
             context.fillStyle = 'green';
-            context.fillRect(this.x + canvas.width/2 - 30, this.y, 110, 6);
-            //context.drawImage(this.imgnet, this.x + canvas.width/2 - 30, this.y, 110, 6)
+            //context.fillRect(this.x + canvas.width/2 - 30, this.y, 110, 6);
+            context.drawImage(this.imgnet, 2/5 * canvas.width, this.y - canvas.height/6, this.cloud_width, 0.05 * window.innerHeight*5)
         }
     }
 
@@ -394,12 +418,14 @@ window.addEventListener('load', function(){
         constructor(game, net) {
             this.game = game;
             this.net = net;
+
             
             this.speedY = -plat_gap/8;
-            this.speedX = canvas.width / 80;
+            this.speedX = canvas.width / 90;
             this.width = 50;
             this.height = 50;
-            this.playerX = canvas.width/2;
+            this.offset = this.width/2
+            this.playerX = canvas.width/2 - this.offset;
             this.playerY = bottomLine[0].y - 50;
 
             this.d_speedY = 1;
@@ -488,7 +514,7 @@ window.addEventListener('load', function(){
                 resetCount = 0;
                 
                 this.playerY = bottomLine[0].y - 50;
-                this.playerX = canvas.width/2;
+                this.playerX = canvas.width/2 - this.offset;
             }
 
         }
@@ -526,6 +552,10 @@ window.addEventListener('load', function(){
             this.dataindex = Math.floor(Math.random()*data.length)
             this.player = new Player(this, this.net);
 
+            //backgrounds -dependant on points
+            this.first_change = 50;
+            this.second_change = 100;
+
             //audio
             this.soundtrack = document.getElementById('audio');
         }
@@ -558,7 +588,9 @@ window.addEventListener('load', function(){
 
         update(){
 
-            //this.background.update();
+            this.background.update();
+
+
             if (correct && jumping) {
                 // variable to check if jump is funishe
                 var x = 10;
@@ -641,7 +673,8 @@ window.addEventListener('load', function(){
         }
 
         draw(context){
-            //this.background.draw(context);
+            this.background.draw(context);
+
             platforms.forEach(plat => {
                 plat.draw(context);
             });
@@ -656,9 +689,6 @@ window.addEventListener('load', function(){
 
     //create initial platforms
     game.initPlatforms(-plat_gap, 0, plat_gap);
-
-
-
 
 
     // animation loop
