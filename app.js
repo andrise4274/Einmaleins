@@ -329,13 +329,13 @@ window.addEventListener('load', function(){
             this.image6 = document.getElementById('layer6');
 
             this.sky1 = new Layer(this.game, this.image1, 1.5);
-            this.sky2 = new Layer(this.game, this.image2, 1.1);
+            this.sky2 = new Layer(this.game, this.image2, 1.3);
             this.strat1 = new Layer(this.game, this.image3, 1.5);
-            this.strat2 = new Layer(this.game, this.image4, 1.1);
+            this.strat2 = new Layer(this.game, this.image4, 1.3);
             this.space1 = new Layer(this.game, this.image5, 1.5);
-            this.space2 = new Layer(this.game, this.image5, 1.1);
+            this.space2 = new Layer(this.game, this.image5, 1.3);
 
-            this.layers = [this.sky1, this.sky2];
+            this.layers = [this.sky1];
         }
 
         update(){
@@ -553,7 +553,7 @@ window.addEventListener('load', function(){
             this.player = new Player(this, this.net);
 
             //backgrounds -dependant on points
-            this.first_change = 50;
+            this.first_change = 25;
             this.second_change = 100;
 
             //audio
