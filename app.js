@@ -305,7 +305,7 @@ window.addEventListener('load', function(){
         }
 
         update() {
-            if (this.y >= 0) this.y = -this.height;
+            if (this.y >= this.height) this.y = 0;
             else this.y += Game.speedY * this.speedModifier;
         }
 
