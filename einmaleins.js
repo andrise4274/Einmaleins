@@ -44,6 +44,25 @@ window.addEventListener('load', function(){
        96, 97, 98, 99
      ];
 
+     // use indicies dependant on selected mode
+     if (mode == 1) indicies = indicies.slice(0, 10);
+     if (mode == 2) indicies = indicies.slice(10, 20);
+     if (mode == 3) indicies = indicies.slice(20, 30);
+     if (mode == 4) indicies = indicies.slice(30, 40);
+     if (mode == 5) indicies = indicies.slice(40, 50);
+     if (mode == 6) indicies = indicies.slice(50, 60);
+     if (mode == 7) indicies = indicies.slice(60, 70);
+     if (mode == 8) indicies = indicies.slice(70, 80);
+     if (mode == 9) indicies = indicies.slice(80, 90);
+     if (mode == 10) indicies = indicies.slice(90, 100);
+     
+     if (mode == 11) {
+        indicies = [10,11,12,13,14,15,16,17,18,19,
+                    40,41,42,43,44,45,46,47,48,49,
+                    90,91,92,93,94,95,96,97,98,99];
+        
+     }
+
     // set up window 10% buttons, 80% canvas, 10% bottom buttons
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
@@ -116,7 +135,6 @@ window.addEventListener('load', function(){
                 // apend wrong index to indicies to make it more likely
                 // that this question comes again
                 indicies.push(platforms[0].mul)
-                indicies.push(platforms[0].mul)
             }
         }
     });
@@ -134,7 +152,6 @@ window.addEventListener('load', function(){
                 correct = false;
                 // apend wrong index to indicies to make it more likely
                 // that this question comes again
-                indicies.push(platforms[0].mul)
                 indicies.push(platforms[0].mul)
             }
         }
@@ -154,7 +171,6 @@ window.addEventListener('load', function(){
                 correct = false;
                 // apend wrong index to indicies to make it more likely
                 // that this question comes again
-                indicies.push(platforms[0].mul)
                 indicies.push(platforms[0].mul)
             }
 
