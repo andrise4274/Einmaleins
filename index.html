@@ -6,8 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Einmaleins</title>
         <link rel="stylesheet" href="./style.css">
-        
-
     </head>
 
     <body>
@@ -15,36 +13,31 @@
         <button id="start">Start</button>
         <button id="reload">Reload</button>
         <canvas id="canvas1"></canvas>
-        <button id="buttonUp">mitte</button>
-        <button id="buttonRight">rechts</button>
-        <button id="buttonLeft">links</button>
+        <button id="buttonUp">middle</button>
+        <button id="buttonRight">right</button>
+        <button id="buttonLeft">left</button>
 
         <select name="level" id="level">
-            <option value="gemütlich">gemütlich</option>
-            <option value="mittel">mittel</option>
-            <option value="schwer">schwer</option>
-            <option value="Endgegner">Endgegner</option>
+            <option value="gemütlich" default>comfortable</option>
+            <option value="mittel">medium</option>
+            <option value="schwer">hard</option>
+            <option value="Endgegner">super difficult</option>
           </select>
 
-          <img id="prov_platform" src="./pictures/prov_platform.png">
+          <img id="cloud" src="./pictures/cloud.png">
           <img id="einstein" src="./pictures/einstein.png">
 
           <!-- correct/false images-->
           <img id="correct" src="pictures/correct.png">
           <img id="false" src="pictures/false.png">
 
-          <!-- net images-->
-          <img id="net" src="pictures/net.png">
-
           <!-- background images-->
-          <img id="layer1" src="pictures/layer1.png">
-          <img id="layer2" src="pictures/layer3.jpg">
+
 
           <!-- audio -->
           <audio id="audio">
             <source src="audio/fastandrun.mp3" type="audio/mpeg">
           </audio>
-
 
         <script src="./app.js"></script>
         <script src="./data.js"></script>

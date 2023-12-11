@@ -1,15 +1,15 @@
-
 window.addEventListener('load', function(){
     //CANVAS SETUP
-    
+
     // global variables
     let running = false;
-
+    // variable to check if jump is finished
     let jumping = false;
+    // check if player is resetting
     let resetting = false;
+    // define the time which it takes to reset
     let resetCount = 0;
     let resetTime = 50;
-
 
     let num_platforms = 3;
     let start_x = window.innerWidth / 2;
@@ -20,7 +20,7 @@ window.addEventListener('load', function(){
 
     let bottomLine = [];
 
-    // boolean that defines if guess is correct
+    // boolean if guess is correct
     let correct = null;
     let guess = null;
 
@@ -34,12 +34,10 @@ window.addEventListener('load', function(){
        60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71,
        72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83,
        84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95,
-       96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111
-     ]
+       96, 97, 98, 99
+     ];
 
-    // make this random, and make difficult calculations occur more often
-
-
+    // set up window 10% buttons, 80% canvas, 10% bottom buttons
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -82,7 +80,6 @@ window.addEventListener('load', function(){
     selectlvl.style.height = buttonheight + 'px';
 
     // start stop button
-    
     const btnStart = this.document.getElementById('start');
     btnStart.style.left = 0 + 'px';
     btnStart.style.top = 0 + 'px';
@@ -109,7 +106,11 @@ window.addEventListener('load', function(){
                 correct = true;
             } else {
                 correct = false;
-            }  
+                // apend wrong index to indicies to make it more likely
+                // that this question comes again
+                indicies.push(platforms[0].mul)
+                indicies.push(platforms[0].mul)
+            }
         }
     });
 
@@ -124,9 +125,13 @@ window.addEventListener('load', function(){
                 correct = true;
             } else {
                 correct = false;
+                // apend wrong index to indicies to make it more likely
+                // that this question comes again
+                indicies.push(platforms[0].mul)
+                indicies.push(platforms[0].mul)
             }
         }
-        
+
     });
 
 
@@ -140,8 +145,12 @@ window.addEventListener('load', function(){
                 correct = true;
             } else {
                 correct = false;
+                // apend wrong index to indicies to make it more likely
+                // that this question comes again
+                indicies.push(platforms[0].mul)
+                indicies.push(platforms[0].mul)
             }
-        
+
         }
     });
 
@@ -175,77 +184,38 @@ window.addEventListener('load', function(){
       });
 
     //---------------------------------------------------------------------------------
-    class Layer {
-        constructor(game, img, speedMod) {
-            this.game = game;
-            this.image = img;
-            this.speedModifier = speedMod;
-            this.width = canvas.width;
-            this.height = 4056;
-            this.x = 0;
-            this.y = 0;
-        }
-
-        update() {
-            if (this.y >= this.height) this.y = 0;
-            else this.y += Game.speedY * this.speedModifier;
-        }
-
-        draw(context) {
-            context.drawImage(this.image, this.x, this.y - this.height);
-        }
-        
-    }
-
-    class Background {
-        constructor(game) {
-            this.game = game;
-            this.image1 = document.getElementById('layer2');
-            this.image2 = document.getElementById('layer2');
-            this.layer1 = new Layer(this.game, this.image1, 1);
-            this.layer2 = new Layer(this.game, this.image2, 1);
-            this.layers = [this.layer1];
-        }
-
-        update(){
-            this.layers.forEach(layer => layer.update());
-        }
-
-        draw(context){
-            this.layers.forEach(layer => layer.draw(context));
-        }
-    }
+    // the classes Layer and Background would be implemented here
     //---------------------------------------------------------------------------------
-    
+
     class Platform {
         constructor(game, y, answers, correctindex, mul) {
             this.game = game;
             this.x = 0;
             this.y = y;
             this.width = canvas.width;
-            this.height = 0.01 * window.innerHeight;
+            this.height = 0.05 * window.innerHeight;
+            this.cloud_width = canvas.width/5;
+            this.text_offset = this.cloud_width/3.5;
             this.correctindex = correctindex;
             this.answers = answers;
             this.mul = mul;
-            this.image = document.getElementById('prov_platform');
+            this.image = document.getElementById('cloud');
         }
 
         update(){
-            // if game window is moving up
+            // make the platforms go down at game speed
             this.y += Game.speedY;
 
         }
         draw(context){
-            //draw a platfo
+            //draw a platform
             for (let i=0; i<3; i++) {
                 context.fillStyle = 'blue';
-                context.drawImage(this.image, (this.width/3 * i), this.y, this.width/3, this.height*5);
-                //context.fillRect((this.width/3 * i), this.y, this.width/3, this.height); 
-
+                context.drawImage(this.image, (this.width *(((i+1)*1/10) + i*1/5)), this.y - (canvas.height/6), this.cloud_width, this.height*5);
                 //draw the number above platforms
                 context.fillStyle = 'black';
                 context.font = Math.floor(0.07 * window.innerHeight) + "px Georgia";
-                context.fillText(this.answers[i], (this.width/3 * i) + deltaButton/2 , this.y - 2);
+                context.fillText(this.answers[i], (this.width *(((i+1)*1/10) + i*1/5)) + this.text_offset, this.y - 2);
             }
         }
     }
@@ -255,16 +225,14 @@ window.addEventListener('load', function(){
             this.game = game;
             this.x = 0;
             this.y = y;
-
-            this.imgnet = document.getElementById('net');
+            this.cloud_width = canvas.width/5;
+            this.imgnet = document.getElementById('cloud');
         }
         update() {
             this.y += Game.speedY;
         }
         draw(context) {
-            context.fillStyle = 'green';
-            context.fillRect(this.x + canvas.width/2 - 30, this.y, 110, 6);
-            //context.drawImage(this.imgnet, this.x + canvas.width/2 - 30, this.y, 110, 6)
+            context.drawImage(this.imgnet, 2/5 * canvas.width, this.y - canvas.height/6, this.cloud_width, 0.05 * window.innerHeight*5);
         }
     }
 
@@ -276,18 +244,15 @@ window.addEventListener('load', function(){
         constructor(game, net) {
             this.game = game;
             this.net = net;
-            
             this.speedY = -plat_gap/8;
-            this.speedX = canvas.width / 80;
+            this.speedX = canvas.width / 90;
             this.width = 50;
             this.height = 50;
-            this.playerX = canvas.width/2;
+            this.offset = this.width/2;
+            this.playerX = canvas.width/2 - this.offset;
             this.playerY = bottomLine[0].y - 50;
-
             this.d_speedY = 1;
-
             this.icon = document.getElementById('einstein');
-
             this.correct = document.getElementById('correct');
             this.false = document.getElementById('false');
         }
@@ -295,9 +260,7 @@ window.addEventListener('load', function(){
         upjump() {
             this.speedY = this.speedY + (plat_gap/150);
             this.playerY += this.speedY;
-            //this.playerX += this.speedX;
             // when jump is finished
-
             if (this.playerY >= bottomLine[0].y - 50 - plat_gap && this.speedY > 0) {
                 return 1;
             }
@@ -307,7 +270,7 @@ window.addEventListener('load', function(){
             this.speedY = this.speedY + (plat_gap/150);
             this.playerY += this.speedY;
             this.playerX -= this.speedX;
-
+            // when jump is finished
             if (this.playerY >= bottomLine[0].y - 50 - plat_gap && this.speedY > 0) {
                 return 0;
             }
@@ -317,7 +280,7 @@ window.addEventListener('load', function(){
             this.speedY = this.speedY + (plat_gap/150);
             this.playerY += this.speedY;
             this.playerX += this.speedX;
-
+            // when jump is finished
             if (this.playerY >= bottomLine[0].y - 50 - plat_gap && this.speedY > 0) {
                 return 2;
             }
@@ -327,9 +290,7 @@ window.addEventListener('load', function(){
         falseupjump() {
             this.speedY = this.speedY + (plat_gap/150);
             this.playerY += this.speedY;
-            //this.playerX += this.speedX;
             // when jump is finished
-
             if (this.playerY >= bottomLine[0].y - 50 && this.speedY > 0) {
                 return 1;
             }
@@ -339,7 +300,7 @@ window.addEventListener('load', function(){
             this.speedY = this.speedY + (plat_gap/150);
             this.playerY += this.speedY;
             this.playerX += this.speedX;
-
+            // when jump is finished
             if (this.playerY >= bottomLine[0].y - 50 && this.speedY > 0) {
                 return 2;
             }
@@ -349,7 +310,7 @@ window.addEventListener('load', function(){
             this.speedY = this.speedY + (plat_gap/150);
             this.playerY += this.speedY;
             this.playerX -= this.speedX;
-
+            // when jump is finished
             if (this.playerY >= bottomLine[0].y - 50 && this.speedY > 0) {
                 return 0;
             }
@@ -359,27 +320,20 @@ window.addEventListener('load', function(){
             // check if still resetting
             if (!jumping && !resetting){
                 this.playerY = bottomLine[0].y - 50;
-
             } else if (resetting && resetCount < resetTime) {
                 resetCount += 1;
-                
                 this.playerY = bottomLine[0].y - 50;
-                
             } else if (resetting) {
                 resetting = false;
                 resetCount = 0;
-                
                 this.playerY = bottomLine[0].y - 50;
-                this.playerX = canvas.width/2;
+                this.playerX = canvas.width/2 - this.offset;
             }
-
         }
 
         draw(context) {
             context.fillStyle = 'black';
             context.drawImage(this.icon, this.playerX, this.playerY);
-            //context.fillRect(this.playerX, this.playerY, 50, 50);
-
             // check if still resetting
             if (resetting && resetCount < resetTime) {
                 if (correct) {
@@ -391,7 +345,6 @@ window.addEventListener('load', function(){
         }
     }
 
-
     //---------------------------------------------------------------------------------
     class Game {
         static points = 0;
@@ -401,13 +354,10 @@ window.addEventListener('load', function(){
         constructor(width, height) {
             this.width = width;
             this.height = height;
-            this.background = new Background(this);
             this.net = new Net(this, 2*plat_gap);
-            // store net in container that class player can acess height
             bottomLine.push(this.net);
-            this.dataindex = Math.floor(Math.random()*data.length)
+            this.dataindex = Math.floor(Math.random()*indicies.length)
             this.player = new Player(this, this.net);
-
             //audio
             this.soundtrack = document.getElementById('audio');
         }
@@ -417,33 +367,30 @@ window.addEventListener('load', function(){
         }
 
         initPlatforms(height1, height2, height3) {
-            var heights = [height3, height2, height1];
-
+            let heights = [height3, height2, height1];
+            let first_mul = null
             for (let i=0; i<num_platforms; i++) {
-                //var rand = Math.floor(Math.random()*data.length);
-                var ind = indicies[i];
+                let rand = Math.floor(Math.random()*indicies.length);
+                let ind = indicies[rand];
+                // set the textfield which displays multiplication correct
+                if (i == 0) first_mul = ind
                 let plat1 = new Platform(this, heights[i], data[ind][1], data[ind][2], ind);
                 platforms.push(plat1);
             }
-            this.settfMul(indicies[0])
+            this.settfMul(first_mul)
         }
-
 
         createPlatform(height){
-            var rand = Math.floor(Math.random()*data.length);
-            var ind = indicies[rand];
+            let rand = Math.floor(Math.random()*indicies.length);
+            let ind = indicies[rand];
             let plat = new Platform(this, height, data[ind][1], data[ind][2], ind);
             platforms.push(plat);
-            console.log("platform created");
         }
 
-
         update(){
-
-            //this.background.update();
             if (correct && jumping) {
-                // variable to check if jump is funishe
-                var x = 10;
+
+                let x = 10;
                 // check whether left, middle or right jump
                 if (guess == 0) {
                     x = this.player.leftjump();
@@ -460,8 +407,8 @@ window.addEventListener('load', function(){
                         platforms.shift();
                         this.createPlatform(platforms[0].y - 2*plat_gap);
                         Game.points += 1;
-                
-                        var ind = platforms[0].mul;
+
+                        let ind = platforms[0].mul;
                         this.settfMul(ind);
 
                         // reset speedy
@@ -470,14 +417,10 @@ window.addEventListener('load', function(){
                         // reset player position
                         resetCount = 0;
                         resetting = true;
-                        //this.player.playerX = canvas.width/2;
-                        //this.player.playerY = bottomLine[0].y - 50;
-
                     }
 
                 } else if (!correct && jumping){
-                    // variable to check if jump is funishe
-                var y = 10;
+                let y = 10;
                 // check whether left, middle or right jump
                 if (guess == 0) {
                     y = this.player.falseleftjump();
@@ -490,40 +433,30 @@ window.addEventListener('load', function(){
                         jumping = false;
                         // reset speedy and speedx
                         this.player.speedY = -plat_gap/8;
-                        //this.player.speedX = 0;
-
                         resetting = true;
                         resetCount = 0;
-                        //this.player.playerX = canvas.width/2;
-                        //this.player.playerY = bottomLine[0].y - 50;
-                        // reset player position
                     }
                 }
 
-
                 this.net.update();
-
                 this.player.update();
 
             // check if one platform is remaining
-            if (platforms[2].y - 50 >= canvas.height) {
+            if (platforms[0].y - 50 >= canvas.height) {
                 running = false;
-                
+
                 function showScore() {
-                    tfMul.value = "Sehr gut!, du hast " + Game.points + " Punkte";
+                    tfMul.value = "Well done!, you've got " + Game.points + " Points";
                 }
                 window.setTimeout(showScore, 1000);
-                //this.soundtrack.stop();
-
             }
-        
+
             platforms.forEach(plat => {
                 plat.update();
             });
         }
 
         draw(context){
-            //this.background.draw(context);
             platforms.forEach(plat => {
                 plat.draw(context);
             });
@@ -538,10 +471,6 @@ window.addEventListener('load', function(){
 
     //create initial platforms
     game.initPlatforms(-plat_gap, 0, plat_gap);
-
-
-
-
 
     // animation loop
     function animate(){
@@ -560,7 +489,4 @@ window.addEventListener('load', function(){
     function stop(){
         cancelAnimationFrame(animate)
     }
-
-    
-})
-
+});

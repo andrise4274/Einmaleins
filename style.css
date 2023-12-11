@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: lightgray;
+    background: aqua;
 
 }
 
@@ -11,7 +11,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: lightgrey;
+    background: deepskyblue;
     max-width: 100%;
     max-height: 100%;
 }
@@ -19,38 +19,43 @@
 #buttonUp {
     width: 60px;
     height: 85px;
-    background-color: red;
+    background-color: blue;
     position: absolute;
+    border: 0cm;
 }
 
 #buttonRight {
     width: 60px;
     height: 85px;
-    background-color: red;
+    background-color: blue;
     position: absolute;
+    border: 0cm;
 }
 
 #buttonLeft {
     width: 60px;
     height: 85px;
-    background-color: red;
+    background-color: blue;
     position: absolute;
+    border: 0cm;
 }
 
 #tfMul {
-    background-color: lightcyan;
+    background-color: aqua;
     text-align: center;
     font-size: 20px;
     position: absolute;
+    border: 0cm;
+    border-radius: 10px;
 }
 
 #level {
-    background-color: blue;
+    background-color: cadetblue;
     text-align: center;
     font-size:15px;
     position: absolute;
     border: 0cm;
-    
+    border-radius: 10px;
 }
 
 #start {
@@ -60,7 +65,7 @@
     position: absolute;
     font-size:15px;
     border: 0cm;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 #reload {
@@ -70,7 +75,7 @@
     position: absolute;
     font-size:15px;
     border: 0cm;
-    border-radius: 25px;
+    border-radius: 10px;
     visibility: hidden;
 }
 
@@ -89,13 +94,8 @@
     height: 50px;
 }
 
-#net {
+#cloud {
     display: none;
     width: 110px;
     height: 30px;
 }
-
-#layer1, #layer2 {
-    display: none;
-}
-
