@@ -30,7 +30,11 @@ The pictures and audio folder store the respective image and audio files for a b
 where the first element is the string of the multiplication, the second element is an array with the 3 possible answers and the last element is the index with the correct result. These properties are used by app.js to display a multiplication with 3 possible answers and check if the guess from the user was correct.
 
 ### app.js
+<<<<<<< HEAD
 Everything inside app.js is in the **window.addEventListener('load', function() })** function to ensure that everything is fully loaded before starting the game. Some global variables which keep track of the state of the game are initialized. Further the array platforms and bottomLine store the rows of clouds and the lowest single cloud throughout the game. The array indicies is initialized with indicies from 0 to 99 to index into the data array. To choose the next multiplication question, one index of indicies is chosen at random to get the next question from data. If the user guesses a wrong answer, it gets pushed to the indicies array twice, which enhances the probability that this question is chosen again. This helpes the user to practice more of the questions which are still unfamiliar.
+=======
+Everything inside app.js is in the **window.addEventListener('load', function() })** function to ensure that everything is fully loaded before starting the game. Some global variables which keep track of the state of the game are initialized. Further the array platforms and bottomLine store the rows of clouds and the lowest single cloud throughout the game. The array indicies is initialized with indicies from 0 to 99 to index into the data array. To choose the next multiplication question, one index of indicies is chosen at random to get the next question from data. If the user guesses a wrong answer, it gets pushed to the indicies array, which enhances the probability that this question is chosen again. This helpes the user to practice more of the questions which are still unfamiliar.
+>>>>>>> mode_selection
 
 Each class inherits from class Game and has its own update and draw method which are called in Game's draw and update method.
 #### event listeners
@@ -39,7 +43,11 @@ Each class inherits from class Game and has its own update and draw method which
 - the select level option sets the speed of the game dependant on the selected level
 - each of the buttons on the bottom of the page has a similar event listener:
  -> It checks wheter the player is jumping or resetting:
+<<<<<<< HEAD
  -> if not, it stores the guess in a global variable and sets jumping=true. Then it checks wheter the guess was correct or not and sets the global variable correct, if the guess was incorrect the correct variable is also set and the index of the multiplication is pushed twice to indicies.
+=======
+ -> if not, it stores the guess in a global variable and sets jumping=true. Then it checks wheter the guess was correct or not and sets the global variable correct, if the guess was incorrect the correct variable is also set and the index of the multiplication is pushed to indicies.
+>>>>>>> mode_selection
 
  #### class Platform
 It handles a platform of 3 clouds which stand for the 3 possible answers of a multiplication. It draws 3 Images and the 3 possible answers on the same height. This height goes down by Game speed.

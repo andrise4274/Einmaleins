@@ -22,6 +22,10 @@
     background-color: blue;
     position: absolute;
     border: 0cm;
+<<<<<<< HEAD
+=======
+    font-size: 15px;
+>>>>>>> mode_selection
 }
 
 #buttonRight {
@@ -30,6 +34,10 @@
     background-color: blue;
     position: absolute;
     border: 0cm;
+<<<<<<< HEAD
+=======
+    font-size: 15px;
+>>>>>>> mode_selection
 }
 
 #buttonLeft {
@@ -38,6 +46,10 @@
     background-color: blue;
     position: absolute;
     border: 0cm;
+<<<<<<< HEAD
+=======
+    font-size: 15px;
+>>>>>>> mode_selection
 }
 
 #tfMul {
@@ -79,9 +91,18 @@
     visibility: hidden;
 }
 
+#back {
+    width: 30px;
+    height: 15px;
+    background-color: forestgreen;
+    position: absolute;
+    font-size: 15px;
+    border: 0cm;
+    border-radius: 10px;
+}
+
 #prov_platform {
     display: none;
-
 }
 
 #einstein {
@@ -98,4 +119,53 @@
     display: none;
     width: 110px;
     height: 30px;
+<<<<<<< HEAD
 }
+=======
+}
+
+/* style for mode selection page*/
+
+.level-drop {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80%;
+    max-width: 300px;
+    margin: 20px auto;
+}
+.level-but {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 300px;
+    margin: 20px auto;
+}
+
+.level-dropdown {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: cadetblue;
+    margin-bottom: 10px;
+}
+.level-button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: cadetblue;
+    margin-bottom: 10px;
+}
+#selectedLevel {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+>>>>>>> mode_selection

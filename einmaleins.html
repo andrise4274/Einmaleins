@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Einmaleins</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <input id="tfMul" value="Malrechnung" readonly>
+        <button id="start">Start</button>
+        <button id="reload">Reload</button>
+        <canvas id="canvas1"></canvas>
+        <button id="buttonUp">mitte</button>
+        <button id="buttonRight">rechts</button>
+        <button id="buttonLeft">links</button>
+        <button id="back">Menü</button>
+
+        <select name="level" id="level">
+            <option value="gemütlich" default>gemütlich</option>
+            <option value="mittel">mittel</option>
+            <option value="schwer">schwer</option>
+            <option value="Endgegner">Endgegner</option>
+          </select>
+
+          <img id="cloud" src="./pictures/cloud.png">
+          <img id="einstein" src="./pictures/einstein.png">
+
+          <!-- correct/false images-->
+          <img id="correct" src="pictures/correct.png">
+          <img id="false" src="pictures/false.png">
+
+          <!-- background images-->
+
+
+          <!-- audio -->
+          <audio id="audio">
+            <source src="audio/fastandrun.mp3" type="audio/mpeg">
+          </audio>
+
+        <script src="./einmaleins.js"></script>
+        <script src="./data.js"></script>
+    </body>
+</html>
