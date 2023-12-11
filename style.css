@@ -79,9 +79,18 @@
     visibility: hidden;
 }
 
+#back {
+    width: 30px;
+    height: 15px;
+    background-color: forestgreen;
+    position: absolute;
+    font-size: 15px;
+    border: 0cm;
+    border-radius: 10px;
+}
+
 #prov_platform {
     display: none;
-
 }
 
 #einstein {

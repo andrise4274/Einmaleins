@@ -107,9 +107,9 @@ window.addEventListener('load', function(){
 
     // start stop button
     const btnStart = this.document.getElementById('start');
-    btnStart.style.left = 0 + 'px';
+    btnStart.style.left = 50 + 'px';
     btnStart.style.top = 0 + 'px';
-    btnStart.style.width = 100 + 'px';
+    btnStart.style.width = 50 + 'px';
     btnStart.style.height = buttonheight + 'px';
 
     // reload button
@@ -118,6 +118,13 @@ window.addEventListener('load', function(){
     btnReload.style.top = 0 + 'px';
     btnReload.style.width = 100 + 'px';
     btnReload.style.height = buttonheight + 'px';
+
+    // button to go back to menu
+    const btnBack = this.document.getElementById('back');
+    btnBack.style.left = 0 + 'px';
+    btnBack.style.top = 0 + 'px';
+    btnBack.style.width = 50 + 'px';
+    btnBack.style.height = buttonheight + 'px';
 
 //---------------------------------------------------------------------------------
 
@@ -182,11 +189,16 @@ window.addEventListener('load', function(){
         running = true;
         start();
         btnStart.style.visibility = 'hidden';
+        btnBack.style.visibility = 'hidden';
         btnReload.style.visibility = 'visible';
     });
 
     btnReload.addEventListener("click", function() {
         location.reload();
+    });
+
+    btnBack.addEventListener('click', function() {
+        window.location.href = 'index.html';
     });
 
     selectlvl.addEventListener('change', function() {
