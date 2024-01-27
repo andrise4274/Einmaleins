@@ -476,11 +476,8 @@ window.addEventListener('load', function(){
             // check if one platform is remaining
             if (platforms[0].y - 50 >= canvas.height) {
                 running = false;
-
-                function showScore() {
-                    tfMul.value = "Well done!, you've got " + Game.points + " Points";
-                }
-                window.setTimeout(showScore, 1000);
+                tfMul.value = "Sehr gut, du hast " + Game.points + " Punkte";
+                this.soundtrack.pause();                
             }
 
             platforms.forEach(plat => {
@@ -509,16 +506,11 @@ window.addEventListener('load', function(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         game.update();
         game.draw(ctx);
-        requestAnimationFrame(animate);
+        if (running) requestAnimationFrame(animate);
     }
 
     function start() {
         animate();
         game.soundtrack.play();
-    }
-
-
-    function stop(){
-        cancelAnimationFrame(animate)
     }
 });
