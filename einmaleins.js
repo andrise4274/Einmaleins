@@ -2,8 +2,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const mode = urlParams.get('data');
 
-// Use the data as needed
-console.log('Mode Selected:', decodeURIComponent(mode));
 
 window.addEventListener('load', function(){
     //CANVAS SETUP
@@ -122,6 +120,15 @@ window.addEventListener('load', function(){
     btnBack.style.top = 0 + 'px';
     btnBack.style.width = 50 + 'px';
     btnBack.style.height = buttonheight + 'px';
+
+
+    function drawCircle(ctx, x, y, r) {
+        ctx.beginPath();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "lightgreen";
+        ctx.arc(x, y, r, 0, 2*Math.PI);
+        ctx.stroke();
+      }
 
 //---------------------------------------------------------------------------------
 
@@ -476,8 +483,9 @@ window.addEventListener('load', function(){
             // check if one platform is remaining
             if (platforms[0].y - 50 >= canvas.height) {
                 running = false;
-                tfMul.value = "Sehr gut, du hast " + Game.points + " Punkte";
-                this.soundtrack.pause();                
+                tfMul.value = "Super! " + Game.points + " Punkte";
+                tfMul.style.backgroundColor = "lightgreen";
+                this.soundtrack.pause();             
             }
 
             platforms.forEach(plat => {
@@ -491,6 +499,12 @@ window.addEventListener('load', function(){
             });
             this.net.draw(context);
             this.player.draw(context);
+
+            // draw points on canvas
+            context.fillStyle = 'lightgreen';
+            drawCircle(context, canvas.width - buttonheight/2 - 5, buttonheight, buttonheight/2)
+            context.fillStyle = "green";
+            context.fillText(Game.points, canvas.width - buttonheight/2 - 17, buttonheight + 10);
         }
     }
 
