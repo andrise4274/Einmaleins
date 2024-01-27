@@ -7,7 +7,7 @@ window.addEventListener('load', function() {
     });
 
 
-    let btn_2Klasse = document.querySelector('#btn_2Klasse');
+    let btn_2Klasse = document.querySelector('#btn_4a');
     btn_2Klasse.addEventListener('click', function() {
         let option = encodeURIComponent(11);;
         window.location.href = `einmaleins.html?data=${option}`;

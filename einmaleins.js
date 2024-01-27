@@ -56,12 +56,9 @@ window.addEventListener('load', function(){
      if (mode == 9) indicies = indicies.slice(80, 90);
      if (mode == 10) indicies = indicies.slice(90, 100);
      
-     if (mode == 11) {
-        indicies = [10,11,12,13,14,15,16,17,18,19,
-                    40,41,42,43,44,45,46,47,48,49,
-                    90,91,92,93,94,95,96,97,98,99];
+     //4a mode
+     if (mode == 11) indicies = indicies.slice(60, 90);
         
-     }
 
     // set up window 10% buttons, 80% canvas, 10% bottom buttons
     const canvas = document.getElementById('canvas1');
