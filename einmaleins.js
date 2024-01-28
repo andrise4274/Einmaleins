@@ -495,10 +495,11 @@ window.addEventListener('load', function(){
             this.player.draw(context);
 
             // draw points on canvas
-            context.drawImage(this.scorebar, canvas.width - 100, 10, 100, buttonheight);
+            context.drawImage(this.scorebar, canvas.width - 100, buttonheight/4 - 5, 100, buttonheight);
             context.fillStyle = "goldenrod";
             ctx.font = "20px Verdana";
-            context.fillText(Game.points, canvas.width - 60, buttonheight - 9);
+            context.fillText(Game.points, canvas.width - 60, buttonheight - 7);
+            console.log(canvas.height)
         }
     }
 
