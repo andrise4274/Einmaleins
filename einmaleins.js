@@ -122,14 +122,6 @@ window.addEventListener('load', function(){
     btnBack.style.height = buttonheight + 'px';
 
 
-    function drawCircle(ctx, x, y, r) {
-        ctx.beginPath();
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = "lightgreen";
-        ctx.arc(x, y, r, 0, 2*Math.PI);
-        ctx.stroke();
-      }
-
 //---------------------------------------------------------------------------------
 
     // event listeners
@@ -399,6 +391,8 @@ window.addEventListener('load', function(){
             this.player = new Player(this, this.net);
             //audio
             this.soundtrack = document.getElementById('audio');
+            //scorebar
+            this.scorebar = document.getElementById('scorebar');
         }
 
         settfMul(ind) {
@@ -501,10 +495,10 @@ window.addEventListener('load', function(){
             this.player.draw(context);
 
             // draw points on canvas
-            context.fillStyle = 'lightgreen';
-            drawCircle(context, canvas.width - buttonheight/2 - 5, buttonheight, buttonheight/2)
-            context.fillStyle = "green";
-            context.fillText(Game.points, canvas.width - buttonheight/2 - 17, buttonheight + 10);
+            context.drawImage(this.scorebar, canvas.width - 100, 10, 100, buttonheight);
+            context.fillStyle = "goldenrod";
+            ctx.font = "20px Verdana";
+            context.fillText(Game.points, canvas.width - 60, buttonheight - 9);
         }
     }
 
