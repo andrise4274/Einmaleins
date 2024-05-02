@@ -54,8 +54,7 @@ window.addEventListener('load', function(){
      if (mode == 9) indicies = indicies.slice(80, 90);
      if (mode == 10) indicies = indicies.slice(90, 100);
      
-     //4a mode
-     if (mode == 11) indicies = indicies.slice(60, 90);
+    
         
 
     // set up window 10% buttons, 80% canvas, 10% bottom buttons
