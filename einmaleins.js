@@ -442,7 +442,7 @@ window.addEventListener('load', function(){
                         Game.points += 1;
 
                         //check if over 100 Points - change Soundtrack
-                        if (Game.points >= 10) {
+                        if (Game.points >= 100) {
                             this.soundtrack1.pause()
                             this.soundtrack2.play()
                         }
