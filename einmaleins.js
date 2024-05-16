@@ -389,7 +389,8 @@ window.addEventListener('load', function(){
             this.dataindex = Math.floor(Math.random()*indicies.length)
             this.player = new Player(this, this.net);
             //audio
-            this.soundtrack = document.getElementById('audio');
+            this.soundtrack1 = document.getElementById('audio1');
+            this.soundtrack2 = document.getElementById('audio2');
             //scorebar
             this.scorebar = document.getElementById('scorebar');
         }
@@ -440,6 +441,12 @@ window.addEventListener('load', function(){
                         this.createPlatform(platforms[0].y - 2*plat_gap);
                         Game.points += 1;
 
+                        //check if over 100 Points - change Soundtrack
+                        if (Game.points >= 10) {
+                            this.soundtrack1.pause()
+                            this.soundtrack2.play()
+                        }
+
                         let ind = platforms[0].mul;
                         this.settfMul(ind);
 
@@ -478,7 +485,8 @@ window.addEventListener('load', function(){
                 running = false;
                 tfMul.value = "Super! " + Game.points + " Punkte";
                 tfMul.style.backgroundColor = "lightgreen";
-                this.soundtrack.pause();             
+                this.soundtrack1.pause();
+                this.soundtrack2.pause();           
             }
 
             platforms.forEach(plat => {
@@ -519,6 +527,6 @@ window.addEventListener('load', function(){
 
     function start() {
         animate();
-        game.soundtrack.play();
+        game.soundtrack1.play();
     }
 });
