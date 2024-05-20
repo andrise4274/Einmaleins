@@ -445,6 +445,8 @@ window.addEventListener('load', function(){
                         if (Game.points >= 100) {
                             this.soundtrack1.pause()
                             this.soundtrack2.play()
+                        } else {
+                            this.soundtrack1.play()
                         }
 
                         let ind = platforms[0].mul;
